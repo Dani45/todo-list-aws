@@ -39,7 +39,10 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: tearDown')
         """Delete mock database and table after test is run"""
-        self.table.delete()
+        try:
+            self.table.delete()
+        except AttributeError as exc_info:
+            print ("Exception: " + str(exc_info))
         print ('Table deleted succesfully')
         #self.table_local.delete()
         self.dynamodb = None
