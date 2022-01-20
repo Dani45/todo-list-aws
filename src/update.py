@@ -9,7 +9,6 @@ def update(event, context):
     if 'text' not in data or 'checked' not in data:
         logging.error("Validation Failed")
         raise Exception("Couldn't update the todo item.")
-        #return
     # update the todo in the database
     result = todoList.update_item(
         event['pathParameters']['id'],
