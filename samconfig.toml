@@ -21,9 +21,9 @@ capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"staging\""
 image_repositories = []
 
-[production]
-[production.deploy]
-[production.deploy.parameters]
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
 stack_name = "todo-list-aws-production"
 s3_bucket = "aws-sam-cli-managed-production-samclisourcebucket-prod" #Incluir bucket propio
 s3_prefix = "todo-list-aws"
