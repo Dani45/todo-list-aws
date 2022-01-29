@@ -48,7 +48,7 @@ class TestDatabaseFunctions(unittest.TestCase):
     def test_table_exists(self):
         print ('---------------------')
         print ('Start: test_table_exists')
-        #self.assertTrue(self.table)  # check if we got a result
+        self.assertTrue(self.table)  # check if we got a result
         #self.assertTrue(self.table_local)  # check if we got a result
 
         print('Table name:' + self.table.name)
@@ -56,9 +56,19 @@ class TestDatabaseFunctions(unittest.TestCase):
         # check if the table name is 'ToDo'
         self.assertIn(tableName, self.table.name)
         #self.assertIn('todoTable', self.table_local.name)
-        print ('End: test_table_exists')
+        print 
+    
+    def test_get_table_todo(self):
+        print ('---------------------')
+        print ('Start: test_get_table_todo')
+        os.environ["ENDPOINT_OVERRIDE"] = ""
+        from src.todoList import get_table
+        table = get_table(None)
+        print('Table name:' + str(table))
+        self.assertIsNotNone(table)
+        print ('End: test_get_table_todo')
         
-
+        
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
@@ -78,10 +88,12 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Start: test_put_todo_error')
         # Testing file functions
         from src.todoList import put_item
+        from src.todoList import get_item
         # Table mock
-        self.assertRaises(Exception, put_item("", self.dynamodb))
+        self.assertRaises(Exception, get_item("", self.dynamodb))
         self.assertRaises(Exception, put_item("", self.dynamodb))
         print ('End: test_put_todo_error')
+        
 
     def test_get_todo(self):
         print ('---------------------')
@@ -138,6 +150,7 @@ class TestDatabaseFunctions(unittest.TestCase):
                             "false",
                             self.dynamodb)
         print ('Result Update Item:' + str(result))
+        resultGet = get_item(idItem, self.dynamodb)
         self.assertEqual(result['text'], updated_text)
         print ('End: test_update_todo')
 
@@ -156,13 +169,13 @@ class TestDatabaseFunctions(unittest.TestCase):
             Exception,
             update_item(
                 updated_text,
-                "",
+                None,
                 "false",
                 self.dynamodb))
         self.assertRaises(
             TypeError,
             update_item(
-                "",
+                None,
                 self.uuid,
                 "false",
                 self.dynamodb))
@@ -171,7 +184,7 @@ class TestDatabaseFunctions(unittest.TestCase):
             update_item(
                 updated_text,
                 self.uuid,
-                "",
+                None,
                 self.dynamodb))
         print ('End: atest_update_todo_error')
 
@@ -199,7 +212,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
-
 
 
 if __name__ == '__main__':
