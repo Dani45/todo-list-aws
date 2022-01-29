@@ -21,6 +21,7 @@ pipeline {
                 sshagent(['jenkins-github']) {
                     withCredentials([gitUsernamePassword(credentialsId: 'account',gitToolName: 'git-tool')]) {
                     sh "git push origin master"
+                    }
                 }
 
             }
