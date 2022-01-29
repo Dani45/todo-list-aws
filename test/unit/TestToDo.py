@@ -39,10 +39,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: tearDown')
         """Delete mock database and table after test is run"""
-        try:
-            self.table.delete()
-        except AttributeError as exc_info:
-            print ("Exception: " + str(exc_info))
+        self.table.delete()
         print ('Table deleted succesfully')
         #self.table_local.delete()
         self.dynamodb = None
@@ -60,6 +57,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertIn(tableName, self.table.name)
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
+        
         
     def test_put_todo(self):
         print ('---------------------')
@@ -81,9 +79,8 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         from src.todoList import put_item
         from src.todoList import get_item
-        
         # Table mock
-        self.assertRaises(Exception, put_item("", self.dynamodb))
+        self.assertRaises(Exception, get_item("", self.dynamodb))
         self.assertRaises(Exception, put_item("", self.dynamodb))
         print ('End: test_put_todo_error')
         
@@ -161,13 +158,13 @@ class TestDatabaseFunctions(unittest.TestCase):
             Exception,
             update_item(
                 updated_text,
-                "",
+                None,
                 "false",
                 self.dynamodb))
         self.assertRaises(
             TypeError,
             update_item(
-                "",
+                None,
                 self.uuid,
                 "false",
                 self.dynamodb))
@@ -176,7 +173,7 @@ class TestDatabaseFunctions(unittest.TestCase):
             update_item(
                 updated_text,
                 self.uuid,
-                "",
+                None,
                 self.dynamodb))
         print ('End: atest_update_todo_error')
 
