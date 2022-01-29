@@ -9,7 +9,7 @@ from botocore.exceptions import ClientError
 
 def get_table(dynamodb=None):
     if not dynamodb:
-        URL = os.environ['ENDPOINT_OVERRIDE']
+        URL = os.environ['ENDPOINT_OVERRIDE'] if 'ENDPOINT_OVERRIDE' in os.environ else None
         if URL:
             print('URL dynamoDB:'+URL)
             boto3.client = functools.partial(boto3.client, endpoint_url=URL)
@@ -42,7 +42,7 @@ def get_items(dynamodb=None):
     table = get_table(dynamodb)
     # fetch todo from the database
     result = table.scan()
-    return result['Items']
+    return result['Items'] if 'Items' in result else None
 
 
 def put_item(text, dynamodb=None):
