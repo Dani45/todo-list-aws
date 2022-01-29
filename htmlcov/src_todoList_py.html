@@ -257,7 +257,7 @@
 <p id="t40" class="stm run hide_run">    <span class="nam">table</span> <span class="op">=</span> <span class="nam">get_table</span><span class="op">(</span><span class="nam">dynamodb</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t41" class="pln">    <span class="com"># fetch todo from the database</span><span class="strut">&nbsp;</span></p>
 <p id="t42" class="stm run hide_run">    <span class="nam">result</span> <span class="op">=</span> <span class="nam">table</span><span class="op">.</span><span class="nam">scan</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t43" class="stm run hide_run">    <span class="key">return</span> <span class="nam">result</span><span class="op">[</span><span class="str">'Items'</span><span class="op">]</span> <span class="key">if</span> <span class="str">'Items'</span> <span class="key">in</span> <span class="nam">result</span> <span class="key">else</span> <span class="key">None</span><span class="strut">&nbsp;</span></p>
+<p id="t43" class="stm run hide_run">    <span class="key">return</span> <span class="nam">result</span><span class="op">[</span><span class="str">'Items'</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
 <p id="t44" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t45" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t46" class="stm run hide_run"><span class="key">def</span> <span class="nam">put_item</span><span class="op">(</span><span class="nam">text</span><span class="op">,</span> <span class="nam">dynamodb</span><span class="op">=</span><span class="key">None</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
@@ -370,7 +370,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.4</a>,
-            created at 2022-01-29 20:07
+            created at 2022-01-29 20:12
         </p>
     </div>
 </div>

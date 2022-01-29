@@ -40,7 +40,7 @@ def get_items(dynamodb=None):
     table = get_table(dynamodb)
     # fetch todo from the database
     result = table.scan()
-    return result['Items'] if 'Items' in result else None
+    return result['Items']
 
 
 def put_item(text, dynamodb=None):
