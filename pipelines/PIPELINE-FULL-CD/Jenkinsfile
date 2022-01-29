@@ -21,6 +21,7 @@ pipeline {
                 sshagent(['jenkins-github']) {
                     withCredentials([gitUsernamePassword(credentialsId: 'account',gitToolName: 'git-tool')]) {
                     sh "git push origin master"
+                    }
                 }
 
             }
@@ -30,7 +31,7 @@ pipeline {
                 
                 echo 'Starting production job'
                 build job: 'PIPELINE-FULL-PRODUCTION', parameters: [
-                      string(name:'ENVIRONMENT', value: "production")]
+                      string(name:'ENVIRONMENT', value: "prod")]
             }
         }
     }

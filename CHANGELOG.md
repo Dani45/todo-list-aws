@@ -7,4 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2022-01-20
 ### Added
 - Versión inicial de código modificado para la pruena de develop
+- Se añadio la coverage al codigo  y se esta realizando las pruenas para los pipeline. 
 
