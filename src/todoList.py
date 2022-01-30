@@ -146,14 +146,13 @@ def create_todo_table(dynamodb):
         raise AssertionError()
     return table
         
-        
-def translate(key, target_language):
+         
+     # se añadio el test de translate.         
+def translator(key, target_language):
     result = get_item(key)
-    translate = boto3.client('translate', region_name="us-east-1")
+    traductor = boto3.client('translate',region_name='us-east-1')
     try:
-        result = translate.translate_text(Text=result['text'],
-                                          SourceLanguageCode="auto",
-                                          TargetLanguageCode=lang)
+        result = traductor.translate_text(Text=result['Item']['text'], SourceLanguageCode=source_language, TargetLanguageCode=target_language)
     except Exception as e:
         raise e
     else:

@@ -200,35 +200,50 @@ class TestApi(unittest.TestCase):
         )
         print('End - integration test Delete TODO')
     
-    
+            
+     # se añadio el test de translate.  
     def test_api_translation(self):
-        
         print('---------------------------------------')
-        print('Starting - Translation Integration Test')
+        print('Starting - integration test Translate TODO')
+        #Add TODO
         url = BASE_URL+"/todos"
         data = {
-         "text": "This is a demo text"
+         "text": "ejemplo simple "
         }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
-        print('Response Add Todo: '+ json_response['body'])
+        print('Response Add Todo: '+ str(json_response))
         jsonbody= json.loads(json_response['body'])
         ID_TODO = jsonbody['id']
-        print ('ID todoo:'+ID_TODO)
+        print ('ID todo:'+ID_TODO)
         self.assertEqual(
             response.status_code, 200, "Error en la petición API a {url}"
         )
         self.assertEqual(
-            jsonbody['text'], "This is a demo text", "Error en la petición API a {url}"
+            jsonbody['text'], "text": "ejemplo simple ", "Error en la petición API a {url}"
         )
-        url = f"{url}/{ID_TODO}/fr"
+        #Test GET TODO
+        url = BASE_URL+"/todos/"+ID_TODO+"/en"
         response = requests.get(url)
+        json_response = response.json()
+        print('Response Translate Todo "en": '+ str(json_response))
         self.assertEqual(
-            response.text, "Il s'agit d'un texte de démonstration", "Error en la petición API a {url}"
+            response.status_code, 200, "Error en la petición API a {url}"
         )
-        url = f"{BASE_URL}/todos/{ID_TODO}"
+        print('responseTranslate: '+ str(json_response['text']))
+        #Test GET TODO
+        url = BASE_URL+"/todos/"+ID_TODO+"/fr"
+        response = requests.get(url)
+        json_response = response.json()
+        print('Response Translate Todo "sv": '+ str(json_response))
+        self.assertEqual(
+            response.status_code, 200, "Error en la petición API a {url}"
+        )
+        print('responseTranslate: '+ str(json_response['text']))
+        #Delete TODO to restore state
+        url = BASE_URL+"/todos/"+ID_TODO
         response = requests.delete(url)
         self.assertEqual(
             response.status_code, 200, "Error en la petición API a {url}"
         )
-        print('End - integration test Translate')
+        print('End - integration test Translate TODO')
