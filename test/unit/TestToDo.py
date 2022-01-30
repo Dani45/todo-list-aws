@@ -219,10 +219,10 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: test_translation')
         
-        from src.todoList import translate
+        from src.todoList import translator
         from src.todoList import put_item
         
-        result = translate('id','en')
+        result = translator('id','en')
         
         print ("Response Error status {result['status_code']} message: {result['message']}")
         
@@ -230,7 +230,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         
         idItem = json.loads(put_translation['body'])['id']
         
-        result = translate(idItem,'fr')
+        result = translator(idItem,'fr')
         
         print ("Response Error 2 status {result['status_code']} message: {result['message']}")
         print ('End: test_translate')

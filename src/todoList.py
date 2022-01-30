@@ -152,7 +152,7 @@ def translator(key, target_language):
     result = get_item(key)
     traductor = boto3.client('translate',region_name='us-east-1')
     try:
-        result = traductor.translate_text(Text=result['Item']['text'], SourceLanguageCode=source_language, TargetLanguageCode=target_language)
+        result = traductor.translate_text(Text=result['Item']['text'], SourceLanguageCode="auto", TargetLanguageCode=target_language)
     except Exception as e:
         raise e
     else:
