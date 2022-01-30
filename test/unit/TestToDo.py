@@ -153,6 +153,27 @@ class TestDatabaseFunctions(unittest.TestCase):
         resultGet = get_item(idItem, self.dynamodb)
         self.assertEqual(result['text'], updated_text)
         print ('End: test_update_todo')
+        
+    def test_translate_todo(self):
+        
+        print ('---------------------')
+        print ('Start: test_translation')
+        
+        from src.todoList import translate
+        from src.todoList import put_item
+        
+        result = translate('id','en')
+        
+        print ("Response Error status {result['status_code']} message: {result['message']}")
+        
+        put_translation = put_item(self.text, self.dynamodb)
+        
+        idItem = json.loads(put_translation['body'])['id']
+        
+        result = translate(idItem,'ynh')
+        
+        print ("Response Error 2 status {result['status_code']} message: {result['message']}")
+        print ('End: test_translate')
 
 
     def test_update_todo_error(self):
@@ -212,7 +233,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
-
+        
 
 if __name__ == '__main__':
     unittest.main()

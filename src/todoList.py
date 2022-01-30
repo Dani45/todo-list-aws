@@ -145,3 +145,16 @@ def create_todo_table(dynamodb):
     if (table.table_status != 'ACTIVE'):
         raise AssertionError()
     return table
+        
+        
+def translate(key, target_language):
+    result = get_item(key)
+    translate = boto3.client('translate', region_name="us-east-1")
+    try:
+        result = translate.translate_text(Text=result['text'],
+                                          SourceLanguageCode="auto",
+                                          TargetLanguageCode=lang)
+    except Exception as e:
+        raise e
+    else:
+        return result
